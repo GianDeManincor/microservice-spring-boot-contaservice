@@ -28,4 +28,12 @@ public class ContaService {
 		}
 		return conta.orElseThrow(() -> new ObjectNotFoundException("A conta não foi encontrada! AGENCIA: " + agencia + ", NUMERO: " + numero));
 	}
+	
+	public Object depositar(Double valor, String agencia, String numero) {
+		Optional<Conta> conta = contaRepo.findContaByAgenciaAndNumero(agencia, numero);
+		if(conta != null && conta.isPresent()) {
+			conta.get().depositar(valor);
+		}
+		return conta.orElseThrow(() -> new ObjectNotFoundException("A conta não foi encontrada! AGENCIA: " + agencia + ", NUMERO: " + numero));
+	}
 }

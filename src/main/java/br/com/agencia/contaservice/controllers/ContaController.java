@@ -18,9 +18,9 @@ public class ContaController {
 	ContaService contaService;
 	
 	@GetMapping(value = "/depositar/{valor}/{agencia}/{numero}")
-	public Conta depositarValor(@PathVariable Double valor, @PathVariable String agencia, @PathVariable String numero) {
-		Conta conta = new Conta();
-		return conta;
+	public ResponseEntity<?> depositarValor(@PathVariable Double valor, @PathVariable String agencia, @PathVariable String numero) {
+		Object conta = contaService.depositar(valor, agencia, numero);
+		return ResponseEntity.ok().body(conta);
 	}
 	
 	@GetMapping(value = "/sacar/{valor}/{agencia}/{numero}")
